@@ -1,0 +1,16 @@
+# Force all Qwen2.5-Omni stages on the single visible GPU
+pipeline: qwen2_5_omni
+
+stages:
+  - stage_id: 0
+    devices: [0]
+    gpu_memory_utilization: 0.35
+    enforce_eager: true
+  - stage_id: 1
+    devices: [0]
+    gpu_memory_utilization: 0.30
+    enforce_eager: true
+  - stage_id: 2
+    devices: [0]
+    gpu_memory_utilization: 0.25
+    enforce_eager: true
