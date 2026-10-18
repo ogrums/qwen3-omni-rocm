@@ -5,13 +5,17 @@ async_chunk: false
 stages:
   - stage_id: 0
     devices: "0"
-    gpu_memory_utilization: 0.35
+    gpu_memory_utilization: 0.40
     enforce_eager: true
+    max_num_seqs: 1
   - stage_id: 1
     devices: "0"
-    gpu_memory_utilization: 0.30
+    gpu_memory_utilization: 0.35
     enforce_eager: true
+    max_num_seqs: 1
+    enable_prefix_caching: false
   - stage_id: 2
     devices: "0"
-    gpu_memory_utilization: 0.25
+    gpu_memory_utilization: 0.20
     enforce_eager: true
+    max_num_seqs: 1
