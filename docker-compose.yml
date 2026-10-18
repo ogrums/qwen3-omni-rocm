@@ -19,9 +19,10 @@ services:
       - MIOPEN_FIND_MODE=FAST
     volumes:
       - huggingface_cache:/root/.cache/huggingface
+    # L'image a déjà un entrypoint qui lance `vllm serve --omni`.
+    # On ne passe donc que les arguments supplémentaires.
     command: >
-      vllm serve Qwen/Qwen3-Omni-30B-A3B-Instruct
-      --omni
+      Qwen/Qwen3-Omni-30B-A3B-Instruct
       --port 8091
       --host 0.0.0.0
     restart: unless-stopped
