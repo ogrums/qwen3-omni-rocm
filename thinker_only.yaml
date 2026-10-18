@@ -1,0 +1,7 @@
+# Minimal single-stage config for Qwen3-Omni Thinker only
+pipeline: qwen3_omni_moe_thinker_only
+
+stages:
+  - stage_id: 0
+    # Force everything on the only visible GPU
+    devices: [0]
