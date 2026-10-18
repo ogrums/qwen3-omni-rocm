@@ -24,6 +24,7 @@ services:
       - HIP_VISIBLE_DEVICES=0
     volumes:
       - huggingface_cache:/root/.cache/huggingface
+      - ./thinker_only.yaml:/app/thinker_only.yaml:ro
     entrypoint: ["vllm", "serve", "--omni"]
     command: >
       Qwen/Qwen3-Omni-30B-A3B-Instruct
@@ -31,7 +32,7 @@ services:
       --host 0.0.0.0
       --init-timeout 3600
       --stage-init-timeout 1800
-      --deploy-config vllm_omni/deploy/qwen3_omni_moe_thinking.yaml
+      --deploy-config /app/thinker_only.yaml
       --gpu-memory-utilization 0.85
     restart: unless-stopped
 
