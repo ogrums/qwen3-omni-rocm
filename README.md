@@ -22,7 +22,32 @@ docker compose up -d
 
 Le premier lancement télécharge le modèle (~60 GB). Attends que le serveur soit prêt (logs : `docker compose logs -f`).
 
-## Test rapide (texte + audio en sortie)
+## Client Python simple
+
+```bash
+pip install -r requirements-client.txt
+
+# Test texte → texte + audio
+python client.py --text "Bonjour, je vais bien, Tout va bien" --save reponse.wav
+
+# Test audio → texte + audio
+python client.py --audio bonjour.wav --save reponse.wav
+```
+
+## Fichier WAV de test
+
+Le script `generate_test_wav.py` crée un WAV mono 16 kHz (tonalité de placeholder).  
+Pour une vraie phrase parlée :
+
+```bash
+# Avec espeak (si installé)
+espeak -v fr "Bonjour, je vais bien, Tout va bien" -w bonjour.wav --stdout | ffmpeg -i - -ar 16000 -ac 1 bonjour.wav
+
+# Ou avec ffmpeg + un TTS en ligne / Piper / etc.
+# Format recommandé : 16 kHz, mono, 16-bit PCM
+```
+
+## Test rapide avec curl (texte)
 
 ```bash
 curl http://localhost:8091/v1/chat/completions \
