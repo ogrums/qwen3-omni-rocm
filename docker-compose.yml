@@ -14,12 +14,14 @@ services:
       - SYS_PTRACE
     security_opt:
       - seccomp:unconfined
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
     environment:
       - HF_TOKEN=${HF_TOKEN:-}
       - MIOPEN_FIND_MODE=FAST
     volumes:
       - huggingface_cache:/root/.cache/huggingface
-    # Force l'entrypoint pour éviter les conflits selon les versions de l'image
     entrypoint: ["vllm", "serve", "--omni"]
     command: >
       Qwen/Qwen3-Omni-30B-A3B-Instruct
