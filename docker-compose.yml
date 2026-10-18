@@ -24,6 +24,7 @@ services:
       - HIP_VISIBLE_DEVICES=0
     volumes:
       - huggingface_cache:/root/.cache/huggingface
+      - ./qwen25_single_gpu.yaml:/app/qwen25_single_gpu.yaml:ro
     entrypoint: ["vllm", "serve", "--omni"]
     command: >
       Qwen/Qwen2.5-Omni-7B
@@ -31,7 +32,7 @@ services:
       --host 0.0.0.0
       --init-timeout 3600
       --stage-init-timeout 1800
-      --gpu-memory-utilization 0.90
+      --deploy-config /app/qwen25_single_gpu.yaml
     restart: unless-stopped
 
 volumes:
