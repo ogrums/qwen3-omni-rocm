@@ -1,0 +1,30 @@
+services:
+  qwen3-omni:
+    image: vllm/vllm-omni-rocm:v0.28.0
+    container_name: qwen3-omni-rocm
+    ports:
+      - "8091:8091"
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    group_add:
+      - video
+    ipc: host
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - HF_TOKEN=${HF_TOKEN:-}
+      - MIOPEN_FIND_MODE=FAST
+    volumes:
+      - huggingface_cache:/root/.cache/huggingface
+    command: >
+      vllm serve Qwen/Qwen3-Omni-30B-A3B-Instruct
+      --omni
+      --port 8091
+      --host 0.0.0.0
+    restart: unless-stopped
+
+volumes:
+  huggingface_cache:
