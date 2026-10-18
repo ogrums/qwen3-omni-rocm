@@ -1,7 +1,7 @@
 services:
-  qwen3-omni:
+  qwen25-omni:
     image: vllm/vllm-omni-rocm:v0.28.0
-    container_name: qwen3-omni-rocm
+    container_name: qwen25-omni-rocm
     ports:
       - "8091:8091"
     devices:
@@ -26,7 +26,7 @@ services:
       - huggingface_cache:/root/.cache/huggingface
     entrypoint: ["vllm", "serve", "--omni"]
     command: >
-      Qwen/Qwen3-Omni-30B-A3B-Instruct
+      Qwen/Qwen2.5-Omni-7B
       --port 8091
       --host 0.0.0.0
       --init-timeout 3600
