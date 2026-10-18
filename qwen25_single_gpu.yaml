@@ -1,5 +1,6 @@
 # Force all Qwen2.5-Omni stages on the single visible GPU
 pipeline: qwen2_5_omni
+async_chunk: false
 
 stages:
   - stage_id: 0
